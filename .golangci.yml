@@ -1,0 +1,59 @@
+run:
+  modules-download-mode: readonly
+
+# all available settings of specific linters
+linters-settings:
+  godox:
+    # report any comments starting with keywords, this is useful for TODO or FIXME comments that
+    # might be left in the code accidentally and should be resolved before merging
+    keywords: # default keywords are TODO, BUG, and FIXME, these can be overwritten by this setting
+      - HACK # messy solution to a problem that can probably be improved
+      - BUG  # known bug with an unknown fix
+      - FIXME # known bug waiting for a known fix
+      - OPTIMIZE # marks code that should be optimized before merging
+  gofumpt:
+    # Select the Go version to target. The default is `1.15`.
+    lang-version: "1.21"
+
+    # Choose whether to use the extra rules that are disabled
+    # by default
+    extra-rules: true
+
+  gomnd:
+    settings:
+      mnd:
+        # the list of enabled checks, see https://github.com/tommy-muehle/go-mnd/#checks for description.
+        checks: case,condition,operation,return
+        # ignored-numbers: 1000
+        # ignored-files: magic_.*.go
+        # ignored-functions: math.*
+
+linters:
+  enable-all: true
+  disable:
+    # 12/12/2023
+    - nosnakecase
+    - structcheck
+    - varcheck
+    - golint
+    - deadcode
+    - exhaustruct
+    - exhaustivestruct
+    - gochecknoglobals
+    - gofmt
+    - ifshort
+    - interfacer
+    - maligned
+    - scopelint
+    - gocognit
+    - cyclop
+    - nestif
+    - depguard
+
+service:
+  project-path: github.com/kmai/the-server # vanity import path if needed
+  analyzed-paths:
+    - cmd/...
+    - pkg/...
+    - internal/...
+  golangci-lint-version: 1.55.2

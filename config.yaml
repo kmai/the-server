@@ -1,0 +1,34 @@
+---
+environment: development
+
+log:
+  format: json
+  level: debug
+
+server:
+  port: 8080
+
+database:
+  engine: mysql-split
+  mysql:
+    split:
+      master:
+        username: root
+        password: my-secret-pw
+        port: 55001
+        databaseName: test
+      replica:
+        username: root
+        password: my-secret-pw
+        port: 55001
+        databaseName: test
+
+service: example-service
+
+telemetry:
+  tracing:
+    exporter: otlp_http
+    processor: batch
+
+    otlp_http:
+      endpoint:
