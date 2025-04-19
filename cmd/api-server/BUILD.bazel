@@ -1,0 +1,22 @@
+load("@rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "api-server_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/kmai/go-project-template/cmd/api-server",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_sirupsen_logrus//:logrus"],
+)
+
+go_binary(
+    name = "api-server",
+    embed = [":api-server_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "api-server_test",
+    size = "small",
+    srcs = ["main_test.go"],
+    embed = [":api-server_lib"],
+)

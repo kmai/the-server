@@ -1,0 +1,49 @@
+version: "2"
+run:
+  go: '1.24'
+  modules-download-mode: readonly
+linters:
+  default: all
+  disable:
+    - gochecknoglobals
+    - nestif
+  settings:
+    # report any comments starting with keywords, this is useful for TODO or FIXME comments that
+    # might be left in the code accidentally and should be resolved before merging
+    godox:
+      keywords:
+        - HACK
+        - BUG
+        - FIXME
+        - OPTIMIZE
+    mnd:
+      checks:
+        - case
+        - condition
+        - operation
+        - return
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gci
+    - gofumpt
+    - goimports
+  settings:
+    gofumpt:
+      extra-rules: true
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
